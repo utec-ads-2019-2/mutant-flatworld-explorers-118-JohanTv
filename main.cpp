@@ -3,8 +3,7 @@
 #include <string>
 using namespace std;
 
-vector<int> robotsLostX;
-vector<int> robotsLostY;
+vector<std::pair<int,int>> robotsLost;
 
 int acotadoX;
 int acotadoY;
@@ -53,8 +52,8 @@ bool canMove(int x,int y){
 }
 
 bool zonaAroma(int x, int y){
-    for (int i = 0; i < robotsLostX.size(); ++i) {
-        if(x == robotsLostX[i] && y == robotsLostY[i]){
+    for (int i = 0; i < robotsLost.size(); ++i) {
+        if(x == robotsLost[i].first && y == robotsLost[i].second){
             return true;
         }
     }
@@ -70,8 +69,9 @@ void move(){
     }
     else if(!zonaAroma(posicionX, posicionY)) {
         lost = true;
-        robotsLostX.push_back(posicionX);
-        robotsLostY.push_back(posicionY);
+        std::pair<int,int> it(posicionX,posicionY);
+        robotsLost.push_back(it);
+
     }
 }
 
